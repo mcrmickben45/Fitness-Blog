@@ -1,17 +1,59 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Your Page Title</title>
+    <link rel="stylesheet" href="./assets/style.css">
+    <title>No Limits</title>
 </head>
-
 <body>
-
-    <h1></h1>
-    <p></p>
-    
+    <header class="header">
+        <h1 id="appTitle">No Limits</h1>
+    </header>
+    <nav class="nav">
+        <div class="menu-toggle" onclick="toggleMenu()">☰</div>
+        <ul class="nav-links">
+            <li><a href="#" onclick="showSection('home')">Home</a></li>
+            <li><a href="#" onclick="showSection('workouts')">Workouts</a></li>
+            <li><a href="#" onclick="showSection('nutrition')">Nutrition</a></li>
+            <li><a href="#" onclick="showSection('profile')">Profile</a></li>
+        </ul>
+    </nav>
+    <main class="main-content">
+        <section id="home" class="content-section">
+            <h2>Your Fitness Journey Starts Here</h2>
+            <p>Discover personalized workouts and nutrition plans to achieve your fitness goals.</p>
+            <a href="#" class="cta-button">Get Started</a>
+        </section>
+        <section id="workouts" class="content-section">
+            <h2>Featured Workouts</h2>
+            <div class="workout-card" onclick="openModal('Cardio Workout', 'Burn calories and improve cardiovascular health with this high-intensity cardio workout.', '30 minutes', 'Intermediate')">
+                <h3>Cardio Workout</h3>
+                <p>Burn calories and improve cardiovascular health with this high-intensity cardio workout.</p>
+            </div>
+            <!-- Add more workout cards here -->
+        </section>
+        <section id="nutrition" class="content-section">
+            <h2>Nutrition Plans</h2>
+            <!-- Add nutrition content here -->
+        </section>
+        <section id="profile" class="content-section">
+            <h2>Your Profile</h2>
+            <!-- Add profile content here -->
+        </section>
+    </main>
+    <div id="modal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal()">&times;</span>
+            <h2 id="modalTitle"></h2>
+            <p id="modalContent"></p>
+            <p id="modalDuration"></p>
+            <p id="modalDifficulty"></p>
+        </div>
+    </div>
+    <footer class="footer">
+        <p>&copy; 2023 No Limits. All rights reserved.</p>
+    </footer>
+    <script defer src="./assets/script.js"></script>
 </body>
-
 </html>

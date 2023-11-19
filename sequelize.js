@@ -1,8 +1,8 @@
 const { Sequelize } = require('sequelize');
 const { development } = require('./config/config.json');
 
-const sequelize = new Sequelize(kmi9hbmemcetxpb7, an0g5pgtn7w5p08t, mbfoxq1aic0i8kdv, {
-  host: i0rgccmrx3at3wv3.cbetxkdyhwsb.us-east-1.rds.amazonaws.com,
+const sequelize = new Sequelize(development.database, development.username, development.password, {
+  host: development.host,
   dialect: 'mysql'
 });
 

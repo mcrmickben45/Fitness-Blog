@@ -68,10 +68,3 @@ document.addEventListener("DOMContentLoaded", function() {
     // For example:
     showSection('home');
 });
-
-
-const sequelize = require('./sequelize'); 
-const User = require('./models/user'); 
-
-
-const newUser = await User.create({ name: 'DataTypes.STRING', email: 'DataTypes.STRING', password: 'DataTypes.STRING' });

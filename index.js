@@ -1,34 +1,52 @@
-const axios = require('axios') 
-process.env.NutritionApi = 'API';
+const axios = require('axios');
+const mysql = require('mysql2');
+require('dotenv').config(); 
 
-axios.get('https://api.nal.usda.gov/fdc/v1/food/2346412?api_key=sNqFb8sEeX5jXteWJFwx6vpJpeQ4Evt67s08ls6m') 
+const { mysql://an0g5pgtn7w5p08t:mbfoxq1aic0i8kdv@i0rgccmrx3at3wv3.cbetxkdyhwsb.us-east-1.rds.amazonaws.com:3306/kmi9hbmemcetxpb7
 
-    .then(res => console.log(res.data)) 
-    .catch(err => console.log(err))
-
-    const mysql = require('mysql2');
+, i0rgccmrx3at3wv3.cbetxkdyhwsb.us-east-1.rds.amazonaws.com, an0g5pgtn7w5p08t, mbfoxq1aic0i8kdv, kmi9hbmemcetxpb7 } = process.env;
 
 let connection;
 
-if (process.env.JAWSDB_URL) {
+if ('mysql://an0g5pgtn7w5p08t:mbfoxq1aic0i8kdv@i0rgccmrx3at3wv3.cbetxkdyhwsb.us-east-1.rds.amazonaws.com:3306/kmi9hbmemcetxpb7'
+
+) {
   
-  connection = mysql.createConnection(process.env.JAWSDB_URL);
+  connection = mysql.createConnection('mysql://an0g5pgtn7w5p08t:mbfoxq1aic0i8kdv@i0rgccmrx3at3wv3.cbetxkdyhwsb.us-east-1.rds.amazonaws.com:3306/kmi9hbmemcetxpb7');
 } else {
   
   connection = mysql.createConnection({
-    host: 'localhost',
-    user: 'root',
-    password: 'password',
-    database: 'your_database',
+    host: DB_HOST || 'i0rgccmrx3at3wv3.cbetxkdyhwsb.us-east-1.rds.amazonaws.com',
+    user: DB_USER || 'an0g5pgtn7w5p08t',
+    password: DB_PASSWORD || 'mbfoxq1aic0i8kdv',
+    database: DB_DATABASE || 'kmi9hbmemcetxpb7',
   });
 }
 
-connection.connect(err => {
+
+const pool = mysql.createPool(connection.config);
+
+pool.getConnection((err, connection) => {
   if (err) {
     console.error('Error connecting to MySQL:', err);
   } else {
     console.log('Connected to MySQL database');
+
+ 
+    connection.release();
   }
 });
 
-module.exports = connection;
+
+pool.on('error', (err) => {
+  console.error('MySQL pool error:', err);
+});
+
+
+axios.get('https://api.nal.usda.gov/fdc/v1/food/2346412?api_key=sNqFb8sEeX5jXteWJFwx6vpJpeQ4Evt67s08ls6m', {
+  params: {
+    api_key: process.env.NutritionApi,
+  },
+})
+  .then(res => console.log(res.data))
+  .catch(err => console.error('Error making API request:', err));

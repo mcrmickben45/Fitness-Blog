@@ -2,26 +2,19 @@ const axios = require('axios');
 const mysql = require('mysql2');
 require('dotenv').config(); 
 
-const { mysql://an0g5pgtn7w5p08t:mbfoxq1aic0i8kdv@i0rgccmrx3at3wv3.cbetxkdyhwsb.us-east-1.rds.amazonaws.com:3306/kmi9hbmemcetxpb7
+const {
+  DB_HOST,
+  DB_USER,
+  DB_PASSWORD,
+  DB_DATABASE,
+} = process.env;
 
-, i0rgccmrx3at3wv3.cbetxkdyhwsb.us-east-1.rds.amazonaws.com, an0g5pgtn7w5p08t, mbfoxq1aic0i8kdv, kmi9hbmemcetxpb7 } = process.env;
-
-let connection;
-
-if ('mysql://an0g5pgtn7w5p08t:mbfoxq1aic0i8kdv@i0rgccmrx3at3wv3.cbetxkdyhwsb.us-east-1.rds.amazonaws.com:3306/kmi9hbmemcetxpb7'
-
-) {
-  
-  connection = mysql.createConnection('mysql://an0g5pgtn7w5p08t:mbfoxq1aic0i8kdv@i0rgccmrx3at3wv3.cbetxkdyhwsb.us-east-1.rds.amazonaws.com:3306/kmi9hbmemcetxpb7');
-} else {
-  
-  connection = mysql.createConnection({
-    host: DB_HOST || 'i0rgccmrx3at3wv3.cbetxkdyhwsb.us-east-1.rds.amazonaws.com',
-    user: DB_USER || 'an0g5pgtn7w5p08t',
-    password: DB_PASSWORD || 'mbfoxq1aic0i8kdv',
-    database: DB_DATABASE || 'kmi9hbmemcetxpb7',
-  });
-}
+const connectionString = process.env.JAWSDB_URL || {
+  host: DB_HOST || 'i0rgccmrx3at3wv3.cbetxkdyhwsb.us-east-1.rds.amazonaws.com',
+  user: DB_USER || 'an0g5pgtn7w5p08t',
+  password: DB_PASSWORD || 'mbfoxq1aic0i8kdv',
+  database: DB_DATABASE || 'kmi9hbmemcetxpb7',
+};
 
 
 const pool = mysql.createPool(connection.config);

@@ -88,3 +88,69 @@ app.get('/logout', (req, res) => {
 app.listen(PORT, () => {
   console.log(`Server is running on http://localhost:${PORT}`);
 });
+
+
+// app.js
+const express = require('express');
+const bodyParser = require('body-parser');
+const session = require('express-session');
+const passport = require('passport');
+const LocalStrategy = require('passport-local').Strategy;
+const { registerUser, authenticateUser } = require('./users');
+
+const app = express();
+
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(session({ secret: 'your-secret-key', resave: true, saveUninitialized: true }));
+app.use(passport.initialize());
+app.use(passport.session());
+
+passport.use(new LocalStrategy({
+  usernameField: 'email',
+  passwordField: 'password',
+}, (email, password, done) => {
+  const user = authenticateUser(email, password);
+  return user ? done(null, user) : done(null, false, { message: 'Invalid credentials' });
+}));
+
+passport.serializeUser((user, done) => {
+  done(null, user.id);
+});
+
+passport.deserializeUser((id, done) => {
+  const users = readUsers();
+  const user = users.find(u => u.id === id);
+  done(null, user);
+});
+
+app.post('/register', (req, res) => {
+  const { username, email, password } = req.body;
+  const newUser = registerUser(username, email, password);
+
+  if (newUser) {
+    req.login(newUser, (err) => {
+      if (err) {
+        return res.status(500).json({ message: 'Error logging in after registration' });
+      }
+      return res.json(newUser);
+    });
+  } else {
+    res.status(400).json({ message: 'Username or email is already taken' });
+  }
+});
+
+app.post('/login', passport.authenticate('local'), (req, res) => {
+  res.json(req.user);
+});
+
+app.get('/profile', (req, res) => {
+  if (req.isAuthenticated()) {
+    res.json(req.user);
+  } else {
+    res.status(401).json({ message: 'Unauthorized' });
+  }
+});
+
+app.listen(3000, () => {
+  console.log('Server is running on port 3000');
+});

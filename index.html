@@ -24,8 +24,7 @@
         <section id="home" class="content-section">
             <h2>Your Fitness Journey Starts Here</h2>
             <p>Discover personalized workouts and nutrition plans to achieve your fitness goals.</p>
-            <a href="#" class="cta-button" onclick="showAuthModal()">Get Started</a>
-
+            <a href="#" class="cta-button" onclick="showGetStartedModal()">Get Started</a>
 
 <div id="getStartedModal" class="modal">
     <div class="modal-content">
@@ -79,6 +78,14 @@
             <h2>Your Profile</h2>
             <!-- Add profile content here -->
         </section>
+        <section id="forum" class="content-section">
+        <div id="forumContainer"></div>
+
+            <h2>Forum</h2>
+            <div id="forumContent"></div>
+            <textarea id="forumPostContent" placeholder="Write your post"></textarea>
+            <button onclick="submitForumPost()">Submit Post</button>
+        </section>
     </main>
     <div id="modal" class="modal">
         <div class="modal-content">
@@ -93,5 +100,7 @@
         <p>&copy; 2023 No Limits. All rights reserved.</p>
     </footer>
     <script defer src="./assets/script.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+
 </body>
 </html>

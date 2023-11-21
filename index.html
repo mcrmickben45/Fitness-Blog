@@ -74,6 +74,12 @@
         <section id="nutrition" class="content-section">
             <h2>Nutrition Plans</h2>
             <!-- Add nutrition content here -->
+            <form id="foodSearchForm">
+                <label for="foodSearch">Search for a Food:</label>
+                <input type="text" id="foodSearch" name="foodSearch" placeholder="Enter food name">
+                <button type="button" onclick="searchFood()">Search</button>
+            </form>
+            <div id="foodSearchResults"></div>
         </section>
         <section id="profile" class="content-section">
             <h2>Your Profile</h2>

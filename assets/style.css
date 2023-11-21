@@ -2,14 +2,12 @@ body, h1, h2, p, ul {
     margin: 0;
     padding: 0;
 }
-/* Body styles */
 body {
     font-family: 'Roboto', sans-serif;
     background-color: #F8F8F8;
     color: #333;
     line-height: 1.6;
 }
-/* Header styles */
 .header {
     background-color: #333;
     color: #fff;
@@ -19,7 +17,6 @@ body {
 header h1 {
     font-size: 2em;
 }
-/* Navigation styles */
 .nav {
     background-color: #555;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
@@ -37,13 +34,12 @@ header h1 {
     transition: color 0.3s ease-in-out;
 }
 .nav a:hover {
-    color: #FFD700; /* change to your preferred hover color */
+    color: #FFD700; 
 }
 .menu-toggle {
     font-size: 1.5em;
     cursor: pointer;
 }
-/* Main section styles */
 .main-content {
     max-width: 800px;
     margin: 0 auto;
@@ -77,9 +73,8 @@ header h1 {
     transition: background-color 0.3s ease-in-out;
 }
 .cta-button:hover {
-    background-color: #FFD700; /* change to your preferred hover color */
+    background-color: #FFD700;
 }
-/* Workout card styles */
 .workout-card {
     cursor: pointer;
     background-color: #ddd;
@@ -99,7 +94,29 @@ header h1 {
 .workout-card p {
     color: #666;
 }
-/* Modal styles */
+#getStartedModal {
+    display: none;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 1;
+    width: 60%;
+    max-width: 400px;
+    background-color: #fff;
+    border: 1px solid #ccc;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+#getStartedModal .modal-content {
+    padding: 20px;
+}
+#getStartedModal .close {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    font-size: 20px;
+    cursor: pointer;
+}
 .modal {
     display: none;
     position: fixed;
@@ -127,7 +144,6 @@ header h1 {
     cursor: pointer;
     color: #333;
 }
-/* Footer styles */
 .footer {
     position: fixed;
     text-align: center;

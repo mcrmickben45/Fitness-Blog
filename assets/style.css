@@ -154,7 +154,7 @@ header h1 {
     color: #fff;
 }
 .header {
-    position: relative; /* Ensure the .header is the positioning context for absolute positioning */
+    position: relative; 
 }
 
 .logo {
@@ -162,17 +162,17 @@ header h1 {
     top: 40%;
     transform: translateY(-50%);
     left: 445px;
-    margin: 10px; /* Add margin for spacing from the edges */
-    width: 90px; /* Adjust the width of the logo */
-    height: auto; /* Maintain the aspect ratio */
-    transition: left 0.5s ease-in-out, right 0.5s ease-in-out; /* Add transition for smooth movement */
+    margin: 10px; 
+    width: 90px; 
+    height: auto; 
+    transition: left 0.5s ease-in-out, right 0.5s ease-in-out; 
     cursor: pointer;
-
-#appTitle {
-    margin-left: 50px; /* Adjust the margin to provide space for the logo */
 }
 
-/* Additional styling for overall layout */
+#appTitle {
+    margin-left: 50px; 
+}
+
 body {
     margin: 0;
     padding: 0;
@@ -188,5 +188,5 @@ body {
     background-color: #f0f0f0;
 }
 #appTitle {
-    margin-left: 160px; /* Adjust the margin to provide space for the logo */
+    margin-left: 160px; 
 }

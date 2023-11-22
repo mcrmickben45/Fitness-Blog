@@ -3,7 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="./assets/style.css">
+    <link rel="stylesheet" href="./assets/style.css">   
+
     <title>No Limits</title>
 </head>
 <body>
@@ -32,7 +33,7 @@
         <span class="close" onclick="closeGetStartedModal()">&times;</span>
         <h2 id="getStartedModalTitle">Get Started</h2>
         <button onclick="showLogin()">Login</button>
-        <button onclick="showRegister()">Register</button>
+        <button onclick="showRegisterForm()">Register</button>
         <div id="loginForm" style="display: none;">
             <label for="username">Username:</label>
             <input type="text" id="username" name="username">
@@ -69,11 +70,9 @@
                 <h3>Cardio Workout</h3>
                 <p>Burn calories and improve cardiovascular health with this high-intensity cardio workout.</p>
             </div>
-            <!-- Add more workout cards here -->
         </section>
         <section id="nutrition" class="content-section">
             <h2>Nutrition Plans</h2>
-            <!-- Add nutrition content here -->
             <form id="foodSearchForm">
                 <label for="foodSearch">Search for a Food:</label>
                 <input type="text" id="foodSearch" name="foodSearch" placeholder="Enter food name">
@@ -81,9 +80,17 @@
             </form>
             <div id="foodSearchResults"></div>
         </section>
-        <section id="profile" class="content-section">
-            <h2>Your Profile</h2>
-            <!-- Add profile content here -->
+
+<section id="profile" class="content-section">
+    <h2>Your Profile</h2>
+    <button onclick="showProfileModal()">Edit Profile</button>
+    <div id="userBio"></div>
+</section>
+
+    <section id="forum" class="content-section">
+        <div id="forumContainer"></div>
+        <textarea id="forumPostContent" placeholder="Write your post"></textarea>
+        <button onclick="submitForumPost()">Submit Post</button>
         </section>
         <section id="forum" class="content-section">
         <div id="forumContainer"></div>

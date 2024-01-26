@@ -1,0 +1,19 @@
+<section id="profile" class="content-section">
+    <h2>Your Profile</h2>
+    <p>Bio: {{user.bio}}</p>
+    <button onclick="showEditProfileModal()">Edit Profile</button>
+</section>
+
+<!-- Add/Edit Profile Modal -->
+<div id="editProfileModal" class="modal">
+    <div class="modal-content">
+        <span class="close" onclick="closeEditProfileModal()">&times;</span>
+        <h2>Edit Profile</h2>
+        <label for="bio">Bio:</label>
+        <textarea id="bio" name="bio">{{user.bio}}</textarea>
+        <br>
+        <button onclick="saveProfileChanges()">Save Changes</button>
+    </div>
+</div>
+
+<script src="../public/js/profile.js"></script>

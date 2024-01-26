@@ -3,23 +3,25 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="./assets/style.css">   
+    <link rel="stylesheet" href="./public/css/style.css">   
 
     <title>No Limits</title>
 </head>
 <body>
     <header class="header">
-        <img src="./assets/images/logo.jpg" alt="No Limits Logo" class="logo">
+        <img src="./public/images/logo.jpg" alt="No Limits Logo" class="logo">
         <h1 id="appTitle">No Limits</h1>
     </header>
     <nav class="nav">
         <div class="menu-toggle" onclick="toggleMenu()">☰</div>
         <ul class="nav-links">
             <li><a href="#" onclick="showSection('home')">Home</a></li>
-            <li><a href="#" onclick="showSection('workouts')">Workouts</a></li>
+            <li><a href="#" onclick="showSection('dashboard')">Dashboard</a></li>
+            <li><a href="#" onclick="showSection('workout')">Workout</a></li>
             <li><a href="#" onclick="showSection('nutrition')">Nutrition</a></li>
             <li><a href="#" onclick="showSection('profile')">Profile</a></li>
-            <li><a href="#" onclick="showSection('forum')">Forum</a></li>
+            <li><a href="#" onclick="showSection('login')">Login</a></li>
+
         </ul>
     </nav>
     <main class="main-content">
@@ -33,16 +35,20 @@
         <span class="close" onclick="closeGetStartedModal()">&times;</span>
         <h2 id="getStartedModalTitle">Get Started</h2>
         <button onclick="showLogin()">Login</button>
-        <button onclick="showRegisterForm()">Register</button>
+        <button onclick="showRegisterForm()">Register</button> 
+
+
         <div id="loginForm" style="display: none;">
-            <label for="username">Username:</label>
-            <input type="text" id="username" name="username">
+            <label for="loginEmail">Email:</label>
+            <input type="text" id="loginEmail" name="loginEmail">
             <br>
-            <label for="password">Password:</label>
-            <input type="password" id="password" name="password">
+            <label for="loginPassword">Password:</label>
+            <input type="password" id="loginPassword" name="loginPassword">
             <br>
             <button type="button" onclick="submitLoginForm()">Submit Login</button>
         </div>
+
+
         <div id="registerForm" style="display: none;">
             <label for="email">Email</label>
             <input type="text" id="email" name="email">
@@ -101,6 +107,7 @@
             <button onclick="submitForumPost()">Submit Post</button>
         </section>
     </main>
+
     <div id="modal" class="modal">
         <div class="modal-content">
             <span class="close" onclick="closeModal()">&times;</span>
@@ -113,7 +120,7 @@
     <footer class="footer">
         <p>&copy; 2023 No Limits. All rights reserved.</p>
     </footer>
-    <script defer src="./assets/script.js"></script>
+    <script defer src="./public/js/script.js"></script>
     <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
 
 </body>

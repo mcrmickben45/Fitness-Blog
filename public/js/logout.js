@@ -15,5 +15,4 @@ const handleLogout = async () => {
         alert('An unexpected error occurred. Please try again later.');
     }
 };
-
-document.querySelector('#logoutBtn').assEventListener('click', handleLogout);
+document.querySelector('#logoutBtn').addEventListener('click', handleLogout);

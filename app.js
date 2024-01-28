@@ -1,11 +1,14 @@
 const express = require('express');
 const session = require('express-session');
-const handlebars = require('express-handlebars');
+const exphbs = require('express-handlebars');
 const sequelize = require('./config/connection.js');
 const path = require('path');
 
 const app = express();
-const PORT = process.env.PORT || 3000;
+
+// View engine 
+app.engine('handlebars', exphbs({ defaultLayout: 'main' }));
+app.set('view engine', 'handlebars');
 
 // Set up session 
 const SequelizeStore = require('connect-session-sequelize')(session.Store);
@@ -27,21 +30,20 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
-// View engine 
-app.engine('handlebars', handlebars({ defaultLayout: 'main' }));
-app.set('view engine', 'handlebars');
-
 // Routes 
-app.use(require('./controllers/'));
-// app.use('/', require('./controllers/homeController.js'));
-// app.use('/auth', require('./controllers/authController.js'));
-// app.use('/dashboard', require('./controllers/dashboardController.js'));
-// app.use('/workout', require('./controllers/workoutController.js'));
-// app.use('/nutrition', require('./controllers/nutritionController.js'));
-// app.use('/profile', require('./controllers/profileController.js'));
+app.use('/', require('./controllers/homeController.js'));
+app.use('/auth', require('./controllers/authController.js'));
+app.use('/dashboard', require('./controllers/dashboardController.js'));
+app.use('/workout', require('./controllers/workoutController.js'));
+app.use('/nutrition', require('./controllers/nutritionController.js'));
+app.use('/profile', require('./controllers/profileController.js'));
 
 // Start Server
-app.listen(PORT, () => console.log(`Server is running on http: //localhost:${PORT}`));
+const PORT = process.env.PORT || 3000;
+
+app.listen(PORT, () => {
+  console.log(`Server is running on port ${PORT}`);
+});
 
 
 

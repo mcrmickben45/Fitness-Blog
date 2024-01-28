@@ -13,19 +13,20 @@
     <header>
         <img src="./../../public/images/logo.jpg" alt="No Limits Logo" class="logo">
         <h1>Limitless</h1>
-        <nav>
-        {{#if loggedIn}}
-            <p>Welcome, {{username}}!
+       <nav>
+    {{#if loggedIn}}
+        <p>Welcome, {{username}}!
             <a href='/'>Home</a>
             <a href='/dashboard'>Dashboard</a>
             <a href='/workout'>Workouts</a>
             <a href='/nutrition'>Nutrition</a>
             <a href='/profile'>Profile</a>
-            <button id='logout' class='btn-no-style'>Logout</button></p>
-        {{else}}
-            <p><a href='/login'>Login</a> or <a href='/signup'>Sign Up</a></p>
-        {{/if}}
-        </nav>
+            <button id='logout' class='btn-no-style' onclick='logout()'>Logout</button>
+        </p>
+    {{else}}
+        <p><a href='/login'>Login</a> or <a href='/signup'>Sign Up</a></p>
+    {{/if}}
+</nav>
     </header>
 
     <main>

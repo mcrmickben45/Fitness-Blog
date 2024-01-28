@@ -20,7 +20,7 @@ Nutrition.init(
     userId: {
         type: DataTypes.INTEGER,
         references: {
-          model: 'user', 
+          model: 'User', 
           key: 'id',
         },
       },

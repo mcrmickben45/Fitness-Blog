@@ -1,145 +1,67 @@
-const { Model, DataTypes } = require('sequelize');
-const sequelize = require('../config/connection.js');
 const bcrypt = require('bcrypt');
 
-class User extends Model {
-  // method to check password
-  verifyPassword(loginPassword) {
-    return bcrypt.compareSync(loginPassword, this.password);
-}
-}
-
-User.init(
-  {
+module.exports = (sequelize, DataTypes) => {
+  const User = sequelize.define('User', {
     username: {
       type: DataTypes.STRING,
       allowNull: false,
       unique: true,
+      validate: {
+        len: [1, 50]
+      }
+    },
+    password: {
+      type: DataTypes.STRING,
+      allowNull: false
     },
     email: {
       type: DataTypes.STRING,
-      allowNull: false,
+      allowNull: true,
       unique: true,
       validate: {
-        isEmail: true,
-      },
-      firstName: {
-        type: DataTypes.STRING,
-        allowNull: true, 
-      },
-      lastName: {
-        type: DataTypes.STRING,
-        allowNull: true,
-      },
-      password: {
-        type: DataTypes.STRING,
-        allowNull: false,
+        isEmail: true
+      }
     },
-  }
-},
-  {
-    sequelize,
-    modelName: 'user',
-  }
-);
-
-module.exports = User;
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-// 'use strict';
-// const {
-//   Model
-// } = require('sequelize');
-// module.exports = (sequelize, DataTypes) => {
-//   class User extends Model {
-//     static associate(models) {
-//     }
-//   }
-//   User.init({
-//     name: DataTypes.STRING,
-//     email: DataTypes.STRING,
-//     password: DataTypes.STRING
-//   }, {
-//     sequelize,
-//     modelName: 'User',
-//   });
-//   return User;
-// };
+    firstName: {
+      type: DataTypes.STRING,
+      allowNull: true
+    },
+    lastName: {
+      type: DataTypes.STRING,
+      allowNull: true
+    },
+    bio: {
+      type: DataTypes.TEXT,
+      allowNull: true
+    },
+    role: {
+      type: DataTypes.ENUM('user', 'admin'),
+      defaultValue: 'user'
+    },
+    password: {
+      type: DataTypes.STRING,
+      allowNull: false,
+      set(value) {
+        // Hash the password before saving it to the database
+        const hashedPassword = bcrypt.hashSync(value, 10);
+        this.setDataValue('password', hashedPassword);
+      },
+    },
+  });
+  
+  User.prototype.validPassword = function (password) {
+    return bcrypt.compareSync(password, this.password);
+  };
 
 
-// // users
-// const fs = require('fs');
-// const bcrypt = require('bcrypt');
+  // Associations
+  User.associate = (models) => {
+  User.hasMany(models.BlogPost);
+  User.hasMany(models.Comment);
+  User.hasOne(models.Profile);
+  User.hasMany(models.Workout);
+  User.hasMany(models.Nutrition);
+  };
 
-// const USERS_FILE = 'users.json';
-
-// function readUsers() {
-//   const usersData = fs.readFileSync(USERS_FILE, 'utf8');
-//   return JSON.parse(usersData);
-// }
-
-// function writeUsers(users) {
-//   fs.writeFileSync(USERS_FILE, JSON.stringify(users), 'utf8');
-// }
-
-// function registerUser(username, email, password) {
-//   const users = readUsers();
-
-//   const isUserExists = users.some(user => user.username === username || user.email === email);
-
-//   if (isUserExists) {
-//     return null; 
-//   }
-
-//   const hashedPassword = bcrypt.hashSync(password, 10);
-
-//   const newUser = {
-//     id: users.length + 1,
-//     username,
-//     email,
-//     password: hashedPassword,
-//   };
-
-//   users.push(newUser);
-//   writeUsers(users);
-
-//   return newUser;
-// }
-
-// function findUserByEmail(email) {
-//   const users = readUsers();
-//   return users.find(user => user.email === email);
-// }
-
-// function authenticateUser(email, password) {
-//   const user = findUserByEmail(email);
-
-//   if (user && bcrypt.compareSync(password, user.password)) {
-//     return user;
-//   }
-
-//   return null; 
-// }
-
-// module.exports = {
-//   registerUser,
-//   authenticateUser,
-// };
+  return User;
+};

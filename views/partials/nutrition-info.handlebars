@@ -1,0 +1,13 @@
+{{#json workoutRoutes}}
+  <h2>Workout Routes</h2>
+  <ul>
+    {{#each workoutRoutes.routes as |route|}}
+      <li>
+        <strong>{{route.name}}</strong>
+        <p>Description: {{route.description}}</p>
+        <p>Duration: {{route.duration}}</p>
+        <p>Difficulty: {{route.difficulty}}</p>
+      </li>
+    {{/each}}
+  </ul>
+{{/json}}

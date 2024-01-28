@@ -1,31 +1,55 @@
-<section>
-  <h2>New Post</h2>
+{{> layouts/main}}
 
-  <form class="custom-post-form">
-    <div>
-      <label for="custom-post-title">Title</label>
-      <input type="text" id="custom-post-title" name="custom-post-title" />
+<section id="dashboard" class="content-section">
+    <h2>Your Dashboard</h2>
+    <p>Welcome, {{username}}! Here's a snapshot of your fitness journey:</p>
+
+    <!-- Dashboard stats -->
+    <div class="dashboard-stats">
+        <div class="stat-card">
+            <h3>Workouts Completed</h3>
+            <p>{{workoutsCompleted}}</p>
+        </div>
+        <div class="stat-card">
+            <h3>Calories Burned</h3>
+            <p>{{caloriesBurned}}</p>
+        </div>
+        <div class="stat-card">
+            <h3>Favorite Workout</h3>
+            <p>{{favoriteWorkout}}</p>
+        </div>
     </div>
-    <div>
-      <label for="custom-post-content">Content</label>
-      <textarea id="custom-post-content" name="custom-post-content"></textarea>
-    </div>
-    <button type="submit" class="custom-btn">Create</button>
-  </form>
-</section>
 
-{{#if customPosts.length}}
-<section>
-    <h2>Your Custom Posts</h2>
-    <ul>
-        {{#each customPosts as |customPost|}}
-        <li>
-            {{> custom-post-info customPost}}
-            <a href="/dashboard/edit/{{customPost.id}}" class="edit-custom-link">Edit post</a>
-        </li>
-        {{/each}}
-    </ul>
-</section>
-{{/if}}
+    <!-- Create New Post Section -->
+    <section>
+        <h2>Create New Post</h2>
+        <form class="new-post-form">
+            <div>
+                <label for="post-title">Title</label>
+                <input type="text" id="post-title" name="post-title" />
+            </div>
+            <div>
+                <label for="post-content">Content</label>
+                <textarea id="post-content" name="post-content"></textarea>
+            </div>
+            <button type="submit" class="btn">Create</button>
+        </form>
+    </section>
 
-<script src="../public/js/add-post.js"></script>
+    <!-- Display User's Posts Section -->
+    {{#if posts.length}}
+    <section>
+        <h2>Your Posts</h2>
+        <ol>
+            {{#each posts as |post|}}
+            <li>
+                {{> post-info post}}
+                <a href="/dashboard/edit/{{post.id}}" class="edit-link">Edit post</a>
+            </li>
+            {{/each}}
+        </ol>
+    </section>
+    {{else}}
+    <p>You haven't created any posts yet. Start sharing your fitness journey!</p>
+    {{/if}}
+</section>

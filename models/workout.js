@@ -1,43 +1,63 @@
-const { Model, DataTypes } = require('sequelize');
-const sequelize = require('../config/connection.js');
-
-class Workout extends Model {}
-
-Workout.init(
-  {
-    name: {
-      type: DataTypes.STRING,
-      allowNull: false,
-    },
-    duration: {
-      type: DataTypes.INTEGER,
-      allowNull: false,
-    },
-    difficulty: {
-      type: DataTypes.STRING,
-      allowNull: false,
-    },
-    servingSize: {
+module.exports = function (sequelize, DataTypes) {
+    const Workout = sequelize.define('Workout', {
+      name: {
         type: DataTypes.STRING,
-        allowNull: true,
+        allowNull: false,
+        validate: {
+          len: [1, 255]
+        }
       },
-      calories: {
+      duration: {
+        type: DataTypes.INTEGER,
+        allowNull: false,
+        validate: {
+          min: 1
+        }
+      },
+      intensity: {
+        type: DataTypes.ENUM('Low', 'Medium', 'High'),
+        allowNull: true
+      },
+      caloriesBurned: {
         type: DataTypes.INTEGER,
         allowNull: true,
+        validate: {
+          min: 0
+        }
       },
-   userId: {
-    type: DataTypes.INTEGER,
-    references: {
-      model: 'user', 
-      key: 'id',
-    },
-  },
-},
-{
-  sequelize,
-  modelName: 'workout',
-}
-);
-
-
-module.exports = Workout;
+      date: {
+        type: DataTypes.DATE,
+        allowNull: false,
+        defaultValue: DataTypes.NOW
+      },
+      // Additional fields
+      distance: {
+        type: DataTypes.FLOAT,
+        allowNull: true,
+        validate: {
+          min: 0
+        }
+      },
+      repetitions: {
+        type: DataTypes.INTEGER,
+        allowNull: true,
+        validate: {
+          min: 0
+        }
+      },
+      sets: {
+        type: DataTypes.INTEGER,
+        allowNull: true,
+        validate: {
+          min: 0
+        }
+      },
+    });
+  
+    // Associations
+    Workout.associate = (models) => {
+    Workout.belongsTo(models.User);
+    };
+    
+    return Workout;
+  };

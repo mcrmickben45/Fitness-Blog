@@ -1,15 +1,7 @@
+{{> layouts/main}}
+
 <section id="nutrition" class="content-section">
-    <h2>Nutrition</h2>
-    {{#if nutritionData.length}}
-        <ul>
-            {{#each nutritionData as |foodItem|}}
-                <li>{{foodItem.name}} - Nutrients: {{foodItem.nutrients}}</li>
-            {{/each}}
-        </ul>
-    {{else}}
-        <p>No saved nutrition data yet.</p>
-    {{/if}}
-    
+    <h2>Nutrition Plans</h2>
     <form id="foodSearchForm">
         <label for="foodSearch">Search for a Food:</label>
         <input type="text" id="foodSearch" name="foodSearch" placeholder="Enter food name">
@@ -17,5 +9,3 @@
     </form>
     <div id="foodSearchResults"></div>
 </section>
-
-<script src="../public/js/nutrition.js"></script>

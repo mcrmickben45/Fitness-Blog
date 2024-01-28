@@ -1,35 +1,73 @@
-const { Model, DataTypes } = require('sequelize');
-const sequelize = require('../config/connection.js');
-
-class Nutrition extends Model {}
-
-Nutrition.init(
-  {
-    foodName: {
-      type: DataTypes.STRING,
-      allowNull: false,
-    },
-    nutrients: {
-      type: DataTypes.JSON, 
-      allowNull: false,
-    },
-    description: {
-        type: DataTypes.TEXT,
-        allowNull: true, 
+module.exports = function (sequelize, DataTypes) {
+    const Nutrition = sequelize.define('Nutrition', {
+      foodName: {
+        type: DataTypes.STRING,
+        allowNull: false,
+        validate: {
+          len: [1, 255]
+        }
       },
-    userId: {
+      calories: {
         type: DataTypes.INTEGER,
-        references: {
-          model: 'User', 
-          key: 'id',
-        },
+        allowNull: false,
+        validate: {
+          min: 1
+        }
       },
-    },
-    {
-      sequelize,
-      modelName: 'nutrition',
-    }
-  );
+      protein: {
+        type: DataTypes.FLOAT,
+        allowNull: true,
+        validate: {
+          min: 0
+        }
+      },
+      carbohydrates: {
+        type: DataTypes.FLOAT,
+        allowNull: true,
+        validate: {
+          min: 0
+        }
+      },
+      fats: {
+        type: DataTypes.FLOAT,
+        allowNull: true,
+        validate: {
+          min: 0
+        }
+      },
+      date: {
+        type: DataTypes.DATE,
+        allowNull: false,
+        defaultValue: DataTypes.NOW
+      },
+      // Additional fields
+      fiber: {
+        type: DataTypes.FLOAT,
+        allowNull: true,
+        validate: {
+          min: 0
+        }
+      },
+      sugar: {
+        type: DataTypes.FLOAT,
+        allowNull: true,
+        validate: {
+          min: 0
+        }
+      },
+      servings: {
+        type: DataTypes.FLOAT,
+        allowNull: true,
+        validate: {
+          min: 0
+        }
+      },
+    });
   
-
-module.exports = Nutrition;
+    // Associations
+    Nutrition.associate = (models) => {
+    Nutrition.belongsTo(models.User);
+    };
+    
+    return Nutrition;
+  };

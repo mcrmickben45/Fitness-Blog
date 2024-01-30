@@ -7,7 +7,6 @@ const sequelize = new Sequelize({
   database: 'fitness_blog_db',
 });
 
-
 const BlogPost = require('./BlogPost')(sequelize, DataTypes);
 const Comment = require('./Comment')(sequelize, DataTypes);
 const Nutrition = require('./Nutrition')(sequelize, DataTypes);
@@ -21,26 +20,24 @@ User.hasOne(Profile);
 User.hasMany(Workout);
 User.hasMany(Nutrition);
 
-
 // Initialize models
 const models = {
-    User,
-    BlogPost,
-    Comment,
-    Nutrition,
-    Profile,
-    Workout,
-  };
+  User,
+  BlogPost,
+  Comment,
+  Nutrition,
+  Profile,
+  Workout,
+};
 
-  Object.values(models).forEach((model) => {
-    if (model.associate) {
-      model.associate(models);
-    }
-  });
-  
-  module.exports = models;
-  
-  // Call sequelize.sync() after importing models
-  sequelize.sync({ force: true }).then(() => {
-    console.log('Database synced successfully');
-  });
+Object.values(models).forEach((model) => {
+  if (model.associate) {
+    model.associate(models);
+  }
+});
+
+module.exports = models;
+
+sequelize.sync({ force: true }).then(() => {
+  console.log('Database synced successfully');
+});

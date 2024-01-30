@@ -1,63 +1,61 @@
 module.exports = function (sequelize, DataTypes) {
-    const Workout = sequelize.define('Workout', {
-      name: {
-        type: DataTypes.STRING,
-        allowNull: false,
-        validate: {
-          len: [1, 255]
-        }
+  const Workout = sequelize.define('Workout', {
+    name: {
+      type: DataTypes.STRING,
+      allowNull: false,
+      validate: {
+        len: [1, 255],
       },
-      duration: {
-        type: DataTypes.INTEGER,
-        allowNull: false,
-        validate: {
-          min: 1
-        }
+    },
+    duration: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+      validate: {
+        min: 1,
       },
-      intensity: {
-        type: DataTypes.ENUM('Low', 'Medium', 'High'),
-        allowNull: true
+    },
+    intensity: {
+      type: DataTypes.ENUM('Low', 'Medium', 'High'),
+      allowNull: true,
+    },
+    caloriesBurned: {
+      type: DataTypes.INTEGER,
+      allowNull: true,
+      validate: {
+        min: 0,
       },
-      caloriesBurned: {
-        type: DataTypes.INTEGER,
-        allowNull: true,
-        validate: {
-          min: 0
-        }
+    },
+    date: {
+      type: DataTypes.DATE,
+      allowNull: false,
+      defaultValue: DataTypes.NOW,
+    },
+    distance: {
+      type: DataTypes.FLOAT,
+      allowNull: true,
+      validate: {
+        min: 0,
       },
-      date: {
-        type: DataTypes.DATE,
-        allowNull: false,
-        defaultValue: DataTypes.NOW
+    },
+    repetitions: {
+      type: DataTypes.INTEGER,
+      allowNull: true,
+      validate: {
+        min: 0,
       },
-      // Additional fields
-      distance: {
-        type: DataTypes.FLOAT,
-        allowNull: true,
-        validate: {
-          min: 0
-        }
+    },
+    sets: {
+      type: DataTypes.INTEGER,
+      allowNull: true,
+      validate: {
+        min: 0,
       },
-      repetitions: {
-        type: DataTypes.INTEGER,
-        allowNull: true,
-        validate: {
-          min: 0
-        }
-      },
-      sets: {
-        type: DataTypes.INTEGER,
-        allowNull: true,
-        validate: {
-          min: 0
-        }
-      },
-    });
-  
-    // Associations
-    Workout.associate = (models) => {
+    },
+  });
+
+  Workout.associate = (models) => {
     Workout.belongsTo(models.User);
-    };
-    
-    return Workout;
   };
+    
+  return Workout;
+};

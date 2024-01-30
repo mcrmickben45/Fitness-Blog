@@ -5,9 +5,10 @@ const session = require('express-session');
 const SequelizeStore = require('connect-session-sequelize')(session.Store);
 const db = require('./models');
 const dotenv = require('dotenv');
-const { Sequelize, DataTypes } = require('sequelize'); // Import Sequelize and DataTypes
+const { Sequelize, DataTypes } = require('sequelize'); 
+const crypto = require('crypto');
+const secretKey = crypto.randomBytes(64).toString('hex');
 
-// Create Sequelize instance
 const sequelize = new Sequelize({
   dialect: 'mysql',
   host: 'localhost',
@@ -22,30 +23,25 @@ dotenv.config();
 const app = express();
 const PORT = process.env.PORT || 3000;
 
-// Set up Handlebars
 app.engine('handlebars', exphbs({ defaultLayout: 'main' }));
 app.set('view engine', 'handlebars');
 app.set('views', path.join(__dirname, 'views'));
 
-// Serve static files from the 'public' directory
 app.use(express.static(path.join(__dirname, 'public')));
 
-// Set up Sequelize for session
 const sessionStore = new SequelizeStore({
   db: sequelize,
 });
 
-// Set up session
 app.use(
   session({
-    secret: 'your-secret-key', // replace with your secret key
+    secret: 'your-secret-key', 
     resave: false,
     saveUninitialized: false,
     store: sessionStore,
   })
 );
 
-// Define routes
 app.get('/', (req, res) => {
   res.render('home', { layout: 'main' });
 });
@@ -54,7 +50,6 @@ app.get('/dashboard', (req, res) => {
   res.render('dashboard', { layout: 'main' });
 });
 
-// Additional routes
 app.get('/login', (req, res) => {
   res.render('login', { layout: 'main' });
 });
@@ -63,12 +58,10 @@ app.get('/signup', (req, res) => {
   res.render('signup', { layout: 'main' });
 });
 
-// Error page route
 app.get('*', (req, res) => {
   res.render('notfound', { layout: 'main' });
 });
 
-// Sync Sequelize and start the server
 sequelize.sync({ force: true }).then(() => {
   app.listen(PORT, () => {
     console.log(`Server is running on http://localhost:${PORT}`);

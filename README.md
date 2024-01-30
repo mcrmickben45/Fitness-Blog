@@ -16,10 +16,11 @@ Fitness gurus and novices alike want to be able to easily find new workout routi
 
 ## User-Story
 
-// As apart of my fitness journey 
-// I want to be able to find new workouts and nutrition guides
-// So that I can maximize my health gains
-// Additionally, I want access to a virtual community and personal profile to document my progress
+// On my fitness journey, I am seeking a comprehensive platform that seamlessly integrates a variety of workout routines, personalized nutrition guides, and cultivates a lively virtual community.
+
+// This integration is crucial to maximize my health goals, fostering a supportive environment where I can both contribute and benefit from the experiences of others.
+
+// Furthermore, I expect the platform to retain my login information, store workout and nutritional logs securely, and provide a feature-rich virtual blog system for easy sharing of my fitness journey.
 
 ## Introduction
 <-- Expand ! -->
@@ -52,13 +53,6 @@ This "No Limits" application project was created by Ahmed Danawi, Amninder Singh
 
 ## Website
 https://github.com/mcrmickben45/Fitness-Blog
-
-![Image 1]
-![Image 2]
-![Image 3]
-![Image 4]
-![Image 5]
-![Image 6]
 
 ## Deployed Heroku
 

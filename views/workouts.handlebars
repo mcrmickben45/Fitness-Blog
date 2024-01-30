@@ -1,9 +1,8 @@
-{{> layouts/main}}
+{{ layouts/main}}
 
 <section id="workouts" class="content-section">
     <h2>Workouts</h2>
     <div class="workout-list">
-        <!-- Sample workout cards, replace with actual workout data from your application -->
         {{#each workouts as |workout|}}
         <div class="workout-card" onclick="openModal('{{workout.title}}', '{{workout.description}}', '{{workout.duration}}', '{{workout.difficulty}}')">
             <h3>{{workout.title}}</h3>
@@ -11,7 +10,5 @@
             <p>Duration: {{workout.duration}}, Difficulty: {{workout.difficulty}}</p>
         </div>
         {{/each}}
-
-        <!-- Add more workout cards based on your application data -->
     </div>
 </section>

@@ -2,7 +2,6 @@ const passport = require('passport');
 const LocalStrategy = require('passport-local').Strategy;
 const db = require('../models');
 
-// Serialize and deserialize user
 passport.serializeUser((user, done) => {
   done(null, user.id);
 });
@@ -16,7 +15,6 @@ passport.deserializeUser(async (id, done) => {
   }
 });
 
-// Local strategy for user login
 passport.use(
   new LocalStrategy(
     {
@@ -31,7 +29,9 @@ passport.use(
           return done(null, false, { message: 'Incorrect username' });
         }
 
-        if (!user.validPassword(password)) {
+        const isValidPassword = await user.validPassword(password);
+
+        if (!isValidPassword) {
           return done(null, false, { message: 'Incorrect password' });
         }
 
@@ -43,4 +43,5 @@ passport.use(
     }
   )
 );
+
 module.exports = passport;

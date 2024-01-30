@@ -2,10 +2,9 @@ const express = require('express');
 const router = express.Router();
 const db = require('../../models');
 
-// Get all nutrition entries for a user
 router.get('/nutrition', async (req, res) => {
   try {
-    const userId = req.session.user.id; // Assuming user is authenticated
+    const userId = req.session.user.id; 
     const nutritionEntries = await db.Nutrition.findAll({
       where: { UserId: userId }
     });
@@ -16,11 +15,10 @@ router.get('/nutrition', async (req, res) => {
   }
 });
 
-// Create a new nutrition entry for a user
 router.post('/nutrition', async (req, res) => {
   const { foodName, calories, protein, carbohydrates, fats, fiber, sugar, servings } = req.body;
   try {
-    const userId = req.session.user.id; // Assuming user is authenticated
+    const userId = req.session.user.id; 
     const newNutritionEntry = await db.Nutrition.create({
       foodName,
       calories,
@@ -39,10 +37,9 @@ router.post('/nutrition', async (req, res) => {
   }
 });
 
-// Get a specific nutrition entry for a user
 router.get('/nutrition/:id', async (req, res) => {
   try {
-    const userId = req.session.user.id; // Assuming user is authenticated
+    const userId = req.session.user.id; 
     const nutritionEntry = await db.Nutrition.findOne({
       where: { id: req.params.id, UserId: userId }
     });
@@ -57,11 +54,10 @@ router.get('/nutrition/:id', async (req, res) => {
   }
 });
 
-// Update a specific nutrition entry for a user
 router.put('/nutrition/:id', async (req, res) => {
   const { foodName, calories, protein, carbohydrates, fats, fiber, sugar, servings } = req.body;
   try {
-    const userId = req.session.user.id; // Assuming user is authenticated
+    const userId = req.session.user.id; 
     const updatedNutritionEntry = await db.Nutrition.update(
       { foodName, calories, protein, carbohydrates, fats, fiber, sugar, servings },
       { where: { id: req.params.id, UserId: userId } }
@@ -77,10 +73,9 @@ router.put('/nutrition/:id', async (req, res) => {
   }
 });
 
-// Delete a specific nutrition entry for a user
 router.delete('/nutrition/:id', async (req, res) => {
   try {
-    const userId = req.session.user.id; // Assuming user is authenticated
+    const userId = req.session.user.id; 
     const deletedNutritionEntry = await db.Nutrition.destroy({
       where: { id: req.params.id, UserId: userId }
     });
@@ -94,7 +89,5 @@ router.delete('/nutrition/:id', async (req, res) => {
     res.status(500).json({ error: 'Internal Server Error' });
   }
 });
-
-
 
 module.exports = router;

@@ -2,10 +2,9 @@ const express = require('express');
 const router = express.Router();
 const db = require('../../models');
 
-// Get all comments for a user
 router.get('/comments', async (req, res) => {
   try {
-    const userId = req.session.user.id; // Assuming user is authenticated
+    const userId = req.session.user.id; 
     const comments = await db.Comment.findAll({
       where: { UserId: userId }
     });
@@ -16,11 +15,10 @@ router.get('/comments', async (req, res) => {
   }
 });
 
-// Create a new comment for a user
 router.post('/comments', async (req, res) => {
   const { content } = req.body;
   try {
-    const userId = req.session.user.id; // Assuming user is authenticated
+    const userId = req.session.user.id; 
     const newComment = await db.Comment.create({
       content,
       UserId: userId
@@ -32,10 +30,9 @@ router.post('/comments', async (req, res) => {
   }
 });
 
-// Get a specific comment for a user
 router.get('/comments/:id', async (req, res) => {
   try {
-    const userId = req.session.user.id; // Assuming user is authenticated
+    const userId = req.session.user.id; 
     const comment = await db.Comment.findOne({
       where: { id: req.params.id, UserId: userId }
     });
@@ -50,11 +47,10 @@ router.get('/comments/:id', async (req, res) => {
   }
 });
 
-// Update a specific comment for a user
 router.put('/comments/:id', async (req, res) => {
   const { content } = req.body;
   try {
-    const userId = req.session.user.id; // Assuming user is authenticated
+    const userId = req.session.user.id; 
     const updatedComment = await db.Comment.update(
       { content },
       { where: { id: req.params.id, UserId: userId } }
@@ -70,10 +66,9 @@ router.put('/comments/:id', async (req, res) => {
   }
 });
 
-// Delete a specific comment for a user
 router.delete('/comments/:id', async (req, res) => {
   try {
-    const userId = req.session.user.id; // Assuming user is authenticated
+    const userId = req.session.user.id; 
     const deletedComment = await db.Comment.destroy({
       where: { id: req.params.id, UserId: userId }
     });

@@ -1,9 +1,7 @@
-// routes/api/blogRoutes.js
 const express = require('express');
 const router = express.Router();
 const db = require('../../models');
 
-// Get all blog posts
 router.get('/blogPosts', async (req, res) => {
   try {
     const blogPosts = await db.BlogPost.findAll();
@@ -14,7 +12,6 @@ router.get('/blogPosts', async (req, res) => {
   }
 });
 
-// Get a specific blog post
 router.get('/blogPosts/:id', async (req, res) => {
   try {
     const blogPost = await db.BlogPost.findByPk(req.params.id, {
@@ -31,11 +28,10 @@ router.get('/blogPosts/:id', async (req, res) => {
   }
 });
 
-// Create a new blog post
 router.post('/blogPosts', async (req, res) => {
   const { title, content, image } = req.body;
   try {
-    const userId = req.session.user.id; // Assuming user is authenticated
+    const userId = req.session.user.id; 
     const newBlogPost = await db.BlogPost.create({
       title,
       content,
@@ -49,11 +45,10 @@ router.post('/blogPosts', async (req, res) => {
   }
 });
 
-// Update a specific blog post
 router.put('/blogPosts/:id', async (req, res) => {
   const { title, content, image } = req.body;
   try {
-    const userId = req.session.user.id; // Assuming user is authenticated
+    const userId = req.session.user.id; 
     const updatedBlogPost = await db.BlogPost.update(
       { title, content, image },
       { where: { id: req.params.id, UserId: userId } }
@@ -69,10 +64,9 @@ router.put('/blogPosts/:id', async (req, res) => {
   }
 });
 
-// Delete a specific blog post
 router.delete('/blogPosts/:id', async (req, res) => {
   try {
-    const userId = req.session.user.id; // Assuming user is authenticated
+    const userId = req.session.user.id; 
     const deletedBlogPost = await db.BlogPost.destroy({
       where: { id: req.params.id, UserId: userId }
     });
@@ -86,7 +80,5 @@ router.delete('/blogPosts/:id', async (req, res) => {
     res.status(500).json({ error: 'Internal Server Error' });
   }
 });
-
-// Add more blog post routes as needed
 
 module.exports = router;
